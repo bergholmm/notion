@@ -96,6 +96,23 @@ impl ListResponse<Object> {
         }
     }
 
+    pub fn only_pages(self) -> ListResponse<Page> {
+        let pages = self
+            .results
+            .into_iter()
+            .filter_map(|object| match object {
+                Object::Page { page } => Some(page),
+                _ => None,
+            })
+            .collect();
+
+        ListResponse {
+            results: pages,
+            has_more: self.has_more,
+            next_cursor: self.next_cursor,
+        }
+    }
+
     pub(crate) fn expect_databases(self) -> Result<ListResponse<Database>, crate::Error> {
         let databases: Result<Vec<_>, _> = self
             .results

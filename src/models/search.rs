@@ -343,6 +343,13 @@ impl NotionSearch {
             value: FilterValue::Database,
         }
     }
+
+    pub fn filter_by_page() -> Self {
+        Self::Filter {
+            property: FilterProperty::Object,
+            value: FilterValue::Page,
+        }
+    }
 }
 
 impl From<NotionSearch> for SearchRequest {
