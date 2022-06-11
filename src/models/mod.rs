@@ -47,6 +47,7 @@ pub struct Database {
     // value object
     // A Property object.
     pub properties: HashMap<String, PropertyConfiguration>,
+    pub parent: Parent,
 }
 
 impl AsIdentifier<DatabaseId> for Database {
